@@ -9,3 +9,4 @@
 **.pkl
 **.json
 **.txt
+!results/flickr30k/dbnet_vgg16/test*.txt
