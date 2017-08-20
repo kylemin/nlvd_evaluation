@@ -76,13 +76,13 @@ function [gAP_th, global_PREC_REC_th, mAP_th, text_PREC_REC_th] =  eval_det_parf
       gAP = average_precision(REC,PREC,[]);
       fprintf('gAP with threshold %.1f is %f\n', DETECTION_IoU_THRESHOLD(1, threshold_idx), gAP);
 
-      fprintf(fid, 'threhshold: %.1f\tgAP: %f\t', DETECTION_IoU_THRESHOLD(1, threshold_idx), gAP);
+      fprintf(fid, 'threhshold: %.1f  gAP: %.4f  ', DETECTION_IoU_THRESHOLD(1, threshold_idx), gAP);
 
       global_PREC_REC = struct('PREC',PREC, 'REC', REC);
                          
       mAP = mAP/numel(text_R);
       fprintf('mAP with threshold %.1f is %f\n', DETECTION_IoU_THRESHOLD(1, threshold_idx), mAP);
-      fprintf(fid, 'mAP: %f\n', mAP);
+      fprintf(fid, 'mAP: %.4f\n', mAP);
 
       if(save_results)
           file_prefix = sprintf('%s/%s_level%d_th%.1f_', output_dir, subset_name, level_id, DETECTION_IoU_THRESHOLD(1, threshold_idx));

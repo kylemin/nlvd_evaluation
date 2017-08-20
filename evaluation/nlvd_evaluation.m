@@ -21,7 +21,7 @@ end
 root_dir = '../';
 output_dir = fullfile(root_dir, 'results', dataset_name, test_title);
 
-result_file = 'level_0_100000.txt'
+result_file = 'level_0_0.txt'
 
 if exist(fullfile(output_dir, result_file), 'file')
     fprintf('Evaluate localization based on the level_0.txt \n');
