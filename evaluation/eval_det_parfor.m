@@ -1,4 +1,4 @@
-function [gAP_th, global_PREC_REC_th, mAP_th, text_PREC_REC_th] =  eval_det_parfor(text_R, level_id, subset_name, test_title, dataset_name, save_results, DETECTION_IoU_THRESHOLD)
+function [gAP_th, global_PREC_REC_th, mAP_th, text_PREC_REC_th] =  eval_det_parfor(text_R, level_id, subset_name, test_title, dataset_name, save_results, DETECTION_IoU_THRESHOLD, nIter)
    nThreshold = numel(DETECTION_IoU_THRESHOLD);
 
    gAP_th = [];
@@ -8,7 +8,7 @@ function [gAP_th, global_PREC_REC_th, mAP_th, text_PREC_REC_th] =  eval_det_parf
 
    root_dir = fileparts(fileparts(mfilename('fullpath')));
    output_dir = fullfile(root_dir, 'results', dataset_name, test_title);
-   fid = fopen(sprintf('%s/%s_level%d_AP.txt', output_dir, subset_name, level_id), 'w');
+   fid = fopen(sprintf('%s/%s_level%d_AP_%s.txt', output_dir, subset_name, level_id, nIter), 'w');
 
    for threshold_idx = 1:nThreshold
       text_PS = [];

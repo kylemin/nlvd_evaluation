@@ -1,0 +1,3 @@
+0.955 0.916 0.876 0.831 0.772 0.713 0.653 
+topOverlap median: 0.898 
+topOverlap mean: 0.742 

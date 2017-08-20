@@ -1,3 +1,0 @@
-threhshold: 0.3	gAP: 0.587058	mAP: 0.822926
-threhshold: 0.5	gAP: 0.364063	mAP: 0.616302
-threhshold: 0.7	gAP: 0.113052	mAP: 0.318362

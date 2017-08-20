@@ -24,7 +24,7 @@ if ~exist('save_results', 'var') || isempty(save_results)
 end
 
 if ~exist('dataset_name', 'var') || isempty(dataset_name)
-   dataset_name = 'vg_v1';
+   dataset_name = 'flickr30k';
 end
 
 if ~exist('test_title', 'var') || isempty(test_title)
@@ -37,7 +37,7 @@ if ~exist('subset_name', 'var') || isempty(subset_name)
 end
 
 if ~exist('parallel', 'var') || isempty(parallel)
-    parallel = false;
+    parallel = true;
 end
 
 if ~exist('level_id', 'var') || isempty(level_id)
@@ -49,11 +49,17 @@ if level_id > 0
    'only test set has different difficulty level for detection task')
 end
 
+%
+[~, name, ~] = fileparts(test_output);
+name_split = strsplit(name, '_');
+nIter = name_split{end};
+%
+
 text_R = process_test_output(test_output, level_id, subset_name, dataset_name);
 
 if parallel
-  [gAP, global_PREC_REC, mAP, text_PREC_REC] =  eval_det_parfor(text_R, level_id, subset_name, test_title, dataset_name, save_results,DETECTION_IoU_THRESHOLD);
+  [gAP, global_PREC_REC, mAP, text_PREC_REC] =  eval_det_parfor(text_R, level_id, subset_name, test_title, dataset_name, save_results,DETECTION_IoU_THRESHOLD, nIter);
 else
-  [gAP, global_PREC_REC, mAP, text_PREC_REC] =  eval_det_for(text_R, level_id, subset_name, test_title, dataset_name, save_results, DETECTION_IoU_THRESHOLD);
+  [gAP, global_PREC_REC, mAP, text_PREC_REC] =  eval_det_for(text_R, level_id, subset_name, test_title, dataset_name, save_results, DETECTION_IoU_THRESHOLD, nIter);
 end
 

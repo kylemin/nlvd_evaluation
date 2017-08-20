@@ -13,7 +13,7 @@ if ~exist('save_results', 'var') || isempty(save_results)
 end
 
 if ~exist('dataset_name', 'var') || isempty(dataset_name)
-    dataset_name = 'vg_v1';
+    dataset_name = 'flickr30k';
 end
 
 if ~exist('test_title', 'var') || isempty(test_title)
@@ -24,11 +24,12 @@ if ~exist('subset_name', 'var') || isempty(subset_name)
     subset_name = 'test';
 end
 
-gt_file = sprintf('../annotations/%s/%s_gt.mat', dataset_name, subset_name);
+%gt_file = sprintf('../annotations/%s/%s_gt.mat', dataset_name, subset_name);
 
-if(~exist(gt_file, 'file'))
-    desc2gtmat(sprintf('../annotations/%s', dataset_name), subset_name);
-end
+%if(~exist(gt_file, 'file'))
+desc2gtmat(sprintf('../annotations/%s', dataset_name), subset_name);
+gt_file = sprintf('../annotations/%s/%s_gt.mat', dataset_name, subset_name);
+%end
 
 if ~strcmp(subset_name, 'train')
     gt_info = load(gt_file);
@@ -140,7 +141,14 @@ end
 
 root_dir = fileparts(fileparts(mfilename('fullpath')));
 output_dir = fullfile(root_dir, 'results', dataset_name, test_title);
-fid = fopen(sprintf('%s/%s_ACC.txt', output_dir,subset_name), 'w');
+
+%
+[~, name, ~] = fileparts(test_output);
+name_split = strsplit(name, '_');
+nIter = name_split{end};
+%
+
+fid = fopen(sprintf('%s/%s_ACC_%s.txt', output_dir,subset_name, nIter), 'w');
 ACC = seqfun( @plus, ACC{:} )/sum(numPhrases);
 fprintf('ACC ')
 for i = 1:size(ACC, 1)
